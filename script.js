@@ -186,6 +186,71 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(el);
         });
     }
+
+    // 5. INPUT MASKS AND VALIDATION IN REAL TIME
+    const phoneInput = document.getElementById('form-phone');
+    const qtyInput = document.getElementById('form-qty');
+    const messageInput = document.getElementById('form-message');
+    const charCount = document.getElementById('char-count');
+
+    // Phone Mask: (XX) XXXXX-XXXX or (XX) XXXX-XXXX
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value;
+            // Remove all non-digits
+            value = value.replace(/\D/g, '');
+            // Limit to 11 digits max
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            // Format to phone mask
+            if (value.length > 10) {
+                // (XX) XXXXX-XXXX
+                e.target.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+            } else if (value.length > 6) {
+                // (XX) XXXX-XXXX
+                e.target.value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+            } else if (value.length > 2) {
+                e.target.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+            } else if (value.length > 0) {
+                e.target.value = `(${value}`;
+            } else {
+                e.target.value = '';
+            }
+        });
+    }
+
+    // Limit Quantity Input to 5 digits max (99999)
+    if (qtyInput) {
+        qtyInput.addEventListener('input', (e) => {
+            let value = e.target.value;
+            if (value.length > 5) {
+                e.target.value = value.slice(0, 5);
+            }
+            // Sync with calculator if changed manually in the form
+            let intVal = parseInt(e.target.value);
+            if (!isNaN(intVal) && calcInput) {
+                calcInput.value = intVal;
+                updateCalculations();
+            }
+        });
+    }
+
+    // Message Character Counter
+    if (messageInput && charCount) {
+        messageInput.addEventListener('input', (e) => {
+            const currentLen = e.target.value.length;
+            charCount.textContent = currentLen;
+            
+            // Visual warning feedback
+            if (currentLen >= 140) {
+                charCount.style.color = '#ff6b6b'; // Red alert
+            } else if (currentLen >= 110) {
+                charCount.style.color = '#ffd166'; // Yellow alert
+            } else {
+                charCount.style.color = 'var(--text-muted)';
+            }
+        });
+    }
 });
 
 // CSS utility added dynamically for highlight indicator

@@ -664,6 +664,15 @@ p {
     box-shadow: 0 0 10px rgba(72, 202, 228, 0.15);
 }
 
+.char-counter-wrapper {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: right;
+    margin-top: 6px;
+    opacity: 0.85;
+    transition: var(--transition-smooth);
+}
+
 .split-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
