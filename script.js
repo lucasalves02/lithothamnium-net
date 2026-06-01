@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. CONSTANTS & DOM ELEMENTS
-    const PRICE_PER_TON = 1200;
+    const PRICE_PER_TON = 1199;
     
     // Calculator Elements
     const calcInput = document.getElementById('calc-tons');
