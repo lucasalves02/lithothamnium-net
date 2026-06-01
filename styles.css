@@ -166,6 +166,19 @@ p {
     font-weight: 800;
     color: #ffffff;
     letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.logo:hover .logo-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.logo-icon {
+    transition: var(--transition-smooth);
 }
 
 .logo-accent {
