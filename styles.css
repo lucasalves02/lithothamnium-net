@@ -276,6 +276,18 @@ p {
     display: flex;
     align-items: baseline;
     gap: 6px;
+    animation: priceBlink 2s infinite ease-in-out;
+}
+
+@keyframes priceBlink {
+    0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 2px rgba(255, 209, 102, 0.1));
+    }
+    50% {
+        opacity: 0.65;
+        filter: drop-shadow(0 0 12px rgba(255, 209, 102, 0.5));
+    }
 }
 
 .price-tag .currency {
