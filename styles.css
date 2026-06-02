@@ -6,18 +6,18 @@
     --bg-secondary: #0c122c;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border-glass: rgba(255, 255, 255, 0.08);
-    
+
     --accent-teal: #06d6a0;
     --accent-cyan: #48cae4;
     --accent-gold: #ffd166;
     --accent-gold-hover: #ffc233;
-    
+
     --text-primary: #f8f9fa;
     --text-secondary: #a5aed1;
     --text-muted: #6c757d;
-    
+
     --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    
+
     --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     --shadow-premium: 0 15px 35px rgba(0, 0, 0, 0.5);
     --shadow-glow: 0 0 25px rgba(6, 214, 160, 0.2);
@@ -50,7 +50,10 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-weight: 700;
     line-height: 1.2;
     color: #ffffff;
@@ -293,10 +296,13 @@ p {
 }
 
 @keyframes priceBlink {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 1;
         filter: drop-shadow(0 0 2px rgba(255, 209, 102, 0.1));
     }
+
     50% {
         opacity: 0.65;
         filter: drop-shadow(0 0 12px rgba(255, 209, 102, 0.5));
@@ -337,8 +343,11 @@ p {
 /* Image wrapper */
 .hero-image-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     position: relative;
+    gap: 24px;
 }
 
 .image-wrapper {
@@ -706,7 +715,9 @@ p {
 }
 
 @keyframes spinner {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Modal success */
@@ -832,6 +843,7 @@ p {
         opacity: 0;
         transform: translateY(15px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -843,6 +855,7 @@ p {
         opacity: 0;
         transform: translateX(30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -856,50 +869,50 @@ p {
         text-align: center;
         gap: 40px;
     }
-    
+
     .hero-content {
         max-width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    
+
     .price-container {
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .hero-actions {
         justify-content: center;
     }
-    
+
     .calculator-wrapper {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-    
+
     .calculator-info {
         max-width: 100%;
         text-align: center;
     }
-    
+
     .info-badges {
         justify-content: center;
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .contact-container {
         grid-template-columns: 1fr;
         gap: 48px;
     }
-    
+
     .contact-text {
         max-width: 100%;
         text-align: center;
     }
-    
+
     .direct-email-card {
         justify-content: center;
         max-width: 400px;
@@ -912,21 +925,325 @@ p {
     .site-header {
         padding: 12px 0;
     }
-    
+
     .nav-links {
-        display: none; /* Em landing page minimalista, podemos esconder links extras no celular para foco na conversão */
+        display: none;
+        /* Em landing page minimalista, podemos esconder links extras no celular para foco na conversão */
     }
-    
+
     .split-row {
         grid-template-columns: 1fr;
         gap: 0;
     }
-    
+
     .contact-form-wrapper {
         padding: 24px;
     }
-    
+
     .calculator-card {
         padding: 24px;
     }
+}
+
+/* Custom Styles for Product Types Box & Datasheet Modal */
+.product-types-box {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-premium);
+    transition: var(--transition-smooth);
+}
+
+.product-types-box:hover {
+    border-color: rgba(72, 202, 228, 0.25);
+    box-shadow: 0 10px 25px rgba(72, 202, 228, 0.1);
+}
+
+.product-types-box .box-title {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.types-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.type-tag {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+    min-width: 100px;
+    transition: var(--transition-smooth);
+}
+
+.type-tag:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.tag-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.tag-dot.farelado {
+    background-color: var(--accent-gold);
+    box-shadow: 0 0 8px var(--accent-gold);
+}
+
+.tag-dot.fino {
+    background-color: var(--accent-cyan);
+    box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.tag-dot.micronizado {
+    background-color: var(--accent-teal);
+    box-shadow: 0 0 8px var(--accent-teal);
+}
+
+.datasheet-promo {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 14px;
+    text-align: center;
+}
+
+.datasheet-promo p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+}
+
+/* Custom Select styling */
+.contact-form .form-group select {
+    width: 100%;
+    background-color: rgba(7, 11, 25, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: #ffffff;
+    transition: var(--transition-smooth);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+.contact-form .form-group select option {
+    background-color: var(--bg-secondary);
+    color: #ffffff;
+}
+
+.contact-form .form-group select:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(72, 202, 228, 0.15);
+}
+
+/* Close button for modals */
+.btn-close-x {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.btn-close-x:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.datasheet-modal-card {
+    position: relative;
+    max-width: 550px !important;
+}
+
+.modal-icon-info {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(72, 202, 228, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+}
+
+.modal-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.modal-form {
+    text-align: left;
+}
+
+/* Hero badge and MAPA registration styles */
+.hero-badge-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.hero-badge-container .badge {
+    margin-bottom: 0;
+}
+
+.badge.badge-mapa {
+    background-color: rgba(72, 202, 228, 0.15);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(72, 202, 228, 0.25);
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Packaging info styles inside the price container */
+.packaging-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.packaging-info svg {
+    color: var(--accent-teal);
+    flex-shrink: 0;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 100px 0;
+    background-color: var(--bg-primary); /* Alternating section backgrounds */
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.faq-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    padding: 32px;
+    border-radius: 16px;
+    transition: var(--transition-smooth);
+}
+
+.faq-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(72, 202, 228, 0.25);
+    box-shadow: 0 10px 25px rgba(72, 202, 228, 0.05);
+}
+
+.faq-question {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.faq-question::before {
+    content: "?";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: rgba(72, 202, 228, 0.1);
+    color: var(--accent-cyan);
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.faq-answer {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Discount Notice & Highlight in Calculator */
+.discount-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255, 209, 102, 0.05);
+    border: 1px solid rgba(255, 209, 102, 0.15);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 24px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.discount-notice svg {
+    color: var(--accent-gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.highlight-teal {
+    color: var(--accent-teal) !important;
 }

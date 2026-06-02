@@ -1,24 +1,34 @@
 // Lithothamnium Landing Page Interactivity
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // 1. CONSTANTS & DOM ELEMENTS
     const PRICE_PER_TON = 1199;
-    
+
     // Calculator Elements
     const calcInput = document.getElementById('calc-tons');
     const calcBasePrice = document.getElementById('calc-base-price');
     const calcTotalPrice = document.getElementById('calc-total-price');
     const btnApplyCalc = document.getElementById('btn-apply-calc');
-    
+    const rowDiscount = document.getElementById('row-discount');
+    const calcDiscountPercent = document.getElementById('calc-discount-percent');
+    const calcDiscountVal = document.getElementById('calc-discount-val');
+
     // Contact Form Elements
     const form = document.getElementById('contact-form');
     const formQtyInput = document.getElementById('form-qty');
     const btnSubmit = document.getElementById('btn-submit');
-    
+
     // Modal Elements
     const successModal = document.getElementById('success-modal');
     const btnCloseModal = document.getElementById('btn-close-modal');
+
+    // Datasheet Modal Elements
+    const datasheetModal = document.getElementById('datasheet-modal');
+    const btnOpenDatasheet = document.getElementById('btn-open-datasheet-modal');
+    const btnCloseDatasheet = document.getElementById('btn-close-datasheet');
+    const datasheetForm = document.getElementById('datasheet-form');
+    const btnSubmitDatasheet = document.getElementById('btn-submit-datasheet');
 
     // Helper: Format Currency to Brazilian Real (BRL)
     const formatCurrency = (value) => {
@@ -31,18 +41,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. CALCULATOR LOGIC
     const updateCalculations = () => {
         let tons = parseFloat(calcInput.value);
-        
+
         // Validation of boundary values
         if (isNaN(tons) || tons < 1) {
             tons = 1;
         } else if (tons > 1000) {
             tons = 1000;
         }
-        
-        const total = tons * PRICE_PER_TON;
-        
+
+        const basePrice = tons * PRICE_PER_TON;
+
+        // Calculate Discount
+        let discountPercent = 0;
+        if (tons >= 100) {
+            discountPercent = 8;
+        } else if (tons >= 30) {
+            discountPercent = 4;
+        }
+
+        const discountVal = basePrice * (discountPercent / 100);
+        const total = basePrice - discountVal;
+
         // Update UI
-        calcBasePrice.textContent = formatCurrency(total);
+        calcBasePrice.textContent = formatCurrency(basePrice);
+
+        if (discountPercent > 0) {
+            if (rowDiscount) rowDiscount.style.display = 'flex';
+            if (calcDiscountPercent) calcDiscountPercent.textContent = discountPercent;
+            if (calcDiscountVal) calcDiscountVal.textContent = `- ${formatCurrency(discountVal)}`;
+        } else {
+            if (rowDiscount) rowDiscount.style.display = 'none';
+        }
+
         calcTotalPrice.textContent = formatCurrency(total);
     };
 
@@ -64,12 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (formQtyInput) {
                 formQtyInput.value = tonsValue;
             }
-            
+
             // Smooth scroll to contact section
             const contactSection = document.getElementById('contato');
             if (contactSection) {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
-                
+
                 // Highlight the form quantity field for micro-feedback
                 setTimeout(() => {
                     formQtyInput.focus();
@@ -89,14 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             // Disable button and show spinner
             btnSubmit.classList.add('btn-loading');
             btnSubmit.disabled = true;
-            
+
             const formData = new FormData(form);
             const action = form.getAttribute('action');
-            
+
             try {
                 // Submit to Formspree or custom handler
                 const response = await fetch(action, {
@@ -106,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Accept': 'application/json'
                     }
                 });
-                
+
                 if (response.ok) {
                     // Success! Show modal
                     showSuccessModal();
@@ -149,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnCloseModal) {
         btnCloseModal.addEventListener('click', closeSuccessModal);
     }
-    
+
     // Close modal if user clicks outside the modal card
     if (successModal) {
         successModal.addEventListener('click', (e) => {
@@ -159,16 +189,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Datasheet Modal Logic
+    if (btnOpenDatasheet && datasheetModal) {
+        btnOpenDatasheet.addEventListener('click', () => {
+            datasheetModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    const closeDatasheetModal = () => {
+        if (datasheetModal) {
+            datasheetModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    };
+
+    if (btnCloseDatasheet) {
+        btnCloseDatasheet.addEventListener('click', closeDatasheetModal);
+    }
+
+    if (datasheetModal) {
+        datasheetModal.addEventListener('click', (e) => {
+            if (e.target === datasheetModal) {
+                closeDatasheetModal();
+            }
+        });
+    }
+
+    if (datasheetForm) {
+        datasheetForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            btnSubmitDatasheet.classList.add('btn-loading');
+            btnSubmitDatasheet.disabled = true;
+
+            const formData = new FormData(datasheetForm);
+            const action = datasheetForm.getAttribute('action');
+
+            try {
+                const response = await fetch(action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                closeDatasheetModal();
+                showSuccessModal();
+                datasheetForm.reset();
+            } catch (error) {
+                console.error('Error submitting datasheet form:', error);
+                closeDatasheetModal();
+                showSuccessModal();
+                datasheetForm.reset();
+            } finally {
+                btnSubmitDatasheet.classList.remove('btn-loading');
+                btnSubmitDatasheet.disabled = false;
+            }
+        });
+    }
+
     // 4. SCROLL ANIMATIONS (Intersection Observer)
-    const animElements = document.querySelectorAll('.benefit-card, .calculator-wrapper, .contact-container');
-    
+    const animElements = document.querySelectorAll('.benefit-card, .calculator-wrapper, .contact-container, .faq-card');
+
     if ('IntersectionObserver' in window) {
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.1
         };
-        
+
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -177,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, observerOptions);
-        
+
         animElements.forEach(el => {
             // Apply base style
             el.style.opacity = '0';
@@ -188,20 +279,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 5. INPUT MASKS AND VALIDATION IN REAL TIME
-    const phoneInput = document.getElementById('form-phone');
+    const phoneInputs = document.querySelectorAll('#form-phone, #datasheet-phone');
     const qtyInput = document.getElementById('form-qty');
     const messageInput = document.getElementById('form-message');
     const charCount = document.getElementById('char-count');
 
     // Phone Mask: (XX) XXXXX-XXXX or (XX) XXXX-XXXX
-    if (phoneInput) {
+    phoneInputs.forEach(phoneInput => {
         phoneInput.addEventListener('input', (e) => {
             let value = e.target.value;
             // Remove all non-digits
             value = value.replace(/\D/g, '');
             // Limit to 11 digits max
             if (value.length > 11) value = value.slice(0, 11);
-            
+
             // Format to phone mask
             if (value.length > 10) {
                 // (XX) XXXXX-XXXX
@@ -217,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.target.value = '';
             }
         });
-    }
+    });
 
     // Limit Quantity Input to 5 digits max (99999)
     if (qtyInput) {
@@ -240,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageInput.addEventListener('input', (e) => {
             const currentLen = e.target.value.length;
             charCount.textContent = currentLen;
-            
+
             // Visual warning feedback
             if (currentLen >= 140) {
                 charCount.style.color = '#ff6b6b'; // Red alert

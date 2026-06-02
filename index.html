@@ -52,6 +52,7 @@
             <nav class="nav-links">
                 <a href="#beneficios">Benefícios</a>
                 <a href="#calculadora">Calculadora</a>
+                <a href="#faq">Dúvidas</a>
                 <a href="#contato" class="btn btn-secondary">Entrar em Contato</a>
             </nav>
         </div>
@@ -63,10 +64,21 @@
             <div class="hero-overlay"></div>
             <div class="container hero-container">
                 <div class="hero-content animate-fade-in">
-                    <span class="badge">Venda Direta</span>
-                    <h1>Compre Lithothamnium direto do fabricante.</h1>
+                    <div class="hero-badge-container">
+                        <span class="badge">Venda Direta</span>
+                        <span class="badge badge-mapa">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                            Registrado no MAPA
+                        </span>
+                    </div>
+                    <h1>Lithothamnium direto do fabricante.</h1>
                     <p class="hero-subtitle">Nutrição mineral de alta performance obtida de algas marinhas calcificadas.
-                        Ideal para agricultura orgânica, pastagens e nutrição animal.</p>
+                        Ideal para todos os tipos de cultura.</p>
 
                     <div class="price-container">
                         <span class="price-label">Preço Promocional</span>
@@ -75,7 +87,18 @@
                             <span class="value">1.199,00</span>
                             <span class="unit">/ tonelada</span>
                         </div>
-                        <p class="price-note">*Pedido mínimo a partir de 1 tonelada. Frete a combinar.</p>
+                        <div class="packaging-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                            </svg>
+                            <span>Embalagem disponível: <strong>Big Bags (1.000 kg)</strong></span>
+                        </div>
+                        <p class="price-note">*Preço válido para a apresentação farelada. Frete a combinar.</p>
                     </div>
 
                     <div class="hero-actions">
@@ -87,6 +110,37 @@
                     <div class="image-wrapper">
                         <img src="assets/lithothamnium_hero.png" alt="Lithothamnium Alga Calcada" class="hero-img">
                         <div class="glowing-orb"></div>
+                    </div>
+
+                    <div class="product-types-box">
+                        <h4 class="box-title">Apresentações:</h4>
+                        <div class="types-tags">
+                            <span class="type-tag">
+                                <span class="tag-dot farelado"></span> Farelado
+                            </span>
+                            <span class="type-tag">
+                                <span class="tag-dot fino"></span> Fino
+                            </span>
+                            <span class="type-tag">
+                                <span class="tag-dot micronizado"></span> Micronizado
+                            </span>
+                        </div>
+                        <div class="datasheet-promo">
+                            <p>Para ter acesso às garantias do produto solicite a ficha técnica.</p>
+                            <button type="button" id="btn-open-datasheet-modal"
+                                class="btn btn-secondary btn-sm btn-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" style="margin-right: 8px;">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                    <polyline points="14 2 14 8 20 8" />
+                                    <line x1="16" y1="13" x2="8" y2="13" />
+                                    <line x1="16" y1="17" x2="8" y2="17" />
+                                    <polyline points="10 9 9 9 8 9" />
+                                </svg>
+                                Solicitar Ficha Técnica
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,6 +218,17 @@
                                 <span class="badge-value">1 tonelada</span>
                             </div>
                         </div>
+
+                        <div class="discount-notice">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                                <line x1="7" y1="7" x2="7.01" y2="7" />
+                            </svg>
+                            <span><strong>Descontos para grandes volumes</strong></span>
+                        </div>
                     </div>
 
                     <div class="calculator-card">
@@ -179,6 +244,10 @@
                             <div class="result-row">
                                 <span>Preço Base</span>
                                 <span id="calc-base-price">R$ 6.000,00</span>
+                            </div>
+                            <div class="result-row" id="row-discount" style="display: none;">
+                                <span>Desconto</span>
+                                <span id="calc-discount-val" class="highlight-teal">- R$ 0,00</span>
                             </div>
                             <div class="result-row">
                                 <span>Frete</span>
@@ -203,7 +272,7 @@
         <section id="contato" class="contact-section">
             <div class="container contact-container">
                 <div class="contact-text">
-                    <h2>Entre em contato direto com nosso departamento de vendas</h2>
+                    <h2>Entre em contato com nosso departamento de vendas</h2>
                     <p>Preencha o formulário para receber uma cotação formal incluindo opções de frete e prazos de
                         entrega para a sua região.</p>
 
@@ -245,8 +314,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="form-phone">WhatsApp / Telefone *</label>
-                                <input type="tel" id="form-phone" name="telefone" required
-                                    placeholder="(00) 99999-9999" pattern="\(\d{2}\)\s\d{4,5}-\d{4}">
+                                <input type="tel" id="form-phone" name="telefone" required placeholder="(00) 99999-9999"
+                                    pattern="\(\d{2}\)\s\d{4,5}-\d{4}">
                             </div>
                         </div>
 
@@ -274,7 +343,108 @@
                 </div>
             </div>
         </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Dúvidas Frequentes</h2>
+                    <p>Principais dúvidas sobre o nosso Lithothamnium e o processo de venda direta.</p>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-card">
+                        <h3 class="faq-question">Qual o teor de Cálcio e Magnésio?</h3>
+                        <p class="faq-answer">Nosso produto possui garantia de <strong>32% de Cálcio (Ca)</strong> e
+                            <strong>2% de Magnésio (Mg)</strong>, garantindo altíssima biodisponibilidade para o solo.
+                        </p>
+                    </div>
+                    <div class="faq-card">
+                        <h3 class="faq-question">Qual é o prazo de entrega?</h3>
+                        <p class="faq-answer">O prazo de entrega é <strong>imediato</strong>. Temos estoque pronto para
+                            expedição imediata da fábrica.</p>
+                    </div>
+                    <div class="faq-card">
+                        <h3 class="faq-question">Como funciona a modalidade de frete?</h3>
+                        <p class="faq-answer">O frete é na modalidade <strong>FOB (Free on Board)</strong>, ou seja, o
+                            comprador é responsável pela retirada do produto na fábrica e pelo transporte.</p>
+                    </div>
+                    <div class="faq-card">
+                        <h3 class="faq-question">Quais são as condições de pagamento?</h3>
+                        <p class="faq-answer">As vendas diretas do fabricante são feitas sob a condição de pagamento
+                            <strong>à vista</strong> para assegurar o valor promocional de cotação.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- Datasheet Request Modal -->
+    <div id="datasheet-modal" class="modal-overlay">
+        <div class="modal-card datasheet-modal-card">
+            <button type="button" id="btn-close-datasheet" class="btn-close-x" aria-label="Fechar modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-icon-info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                </svg>
+            </div>
+            <h2>Solicitar Ficha Técnica</h2>
+            <p class="modal-subtitle">Preencha os dados abaixo para receber imediatamente a ficha técnica com todas as
+                garantias do produto.</p>
+
+            <form id="datasheet-form" action="https://formspree.io/f/meedynwg" method="POST"
+                class="contact-form modal-form">
+                <input type="hidden" name="_subject" value="Solicitação de Ficha Técnica - Lithothamnium.net">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="datasheet-name">Seu Nome *</label>
+                        <input type="text" id="datasheet-name" name="nome" required minlength="4"
+                            placeholder="Digite seu nome completo">
+                    </div>
+                </div>
+
+                <div class="form-row split-row">
+                    <div class="form-group">
+                        <label for="datasheet-email">E-mail Comercial *</label>
+                        <input type="email" id="datasheet-email" name="email" required
+                            placeholder="exemplo@empresa.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="datasheet-phone">WhatsApp / Telefone *</label>
+                        <input type="tel" id="datasheet-phone" name="telefone" required placeholder="(00) 99999-9999">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="datasheet-product">Tipo de Interesse</label>
+                        <select id="datasheet-product" name="tipo_produto">
+                            <option value="todos">Todos os tipos (Farelado, Fino e Micronizado)</option>
+                            <option value="farelado">Farelado</option>
+                            <option value="fino">Fino</option>
+                            <option value="micronizado">Micronizado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-submit-datasheet" class="btn btn-primary btn-block">
+                    Enviar Solicitação
+                </button>
+            </form>
+        </div>
+    </div>
 
     <!-- Success Modal -->
     <div id="success-modal" class="modal-overlay">
