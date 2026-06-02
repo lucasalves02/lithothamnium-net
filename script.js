@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // 1. CONSTANTS & DOM ELEMENTS
-    const PRICE_PER_TON = 1199;
+    const PRICE_PER_TON = 1289;
 
     // Calculator Elements
     const calcInput = document.getElementById('calc-tons');
@@ -53,7 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Calculate Discount
         let discountPercent = 0;
-        if (tons >= 100) {
+        if (tons >= 150) {
+            discountPercent = 12;
+        } else if (tons >= 60) {
             discountPercent = 8;
         } else if (tons >= 30) {
             discountPercent = 4;
